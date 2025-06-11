@@ -88,3 +88,16 @@ while getopts ":hm:l:iUuo:" opt; do
   esac
 done
 
+echo "IP a MAC:"
+
+IPV4=$(ip -4 addr show | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
+echo "IPv4 adresa: $IPV4"
+
+IPV6=$(ip -6 addr show | grep -oP '(?<=inet6\s)[a-f0-9:]+')
+echo "IPv6 adresa: $IPV6"
+
+MAC=$(ip link show | awk '/ether/ {print $2; exit}')
+echo "MAC adresa: $MAC"
+
+CIDR=$(ip -4 addr show | grep -oP 'inet \K[\d./]+')
+echo "CIDR rozsah: $CIDR"
