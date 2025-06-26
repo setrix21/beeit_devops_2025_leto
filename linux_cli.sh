@@ -101,3 +101,8 @@ echo "MAC adresa: $MAC"
 
 CIDR=$(ip -4 addr show | grep -oP 'inet \K[\d./]+')
 echo "CIDR rozsah: $CIDR"
+echo "Procesové informace:"
+echo "PID aktuálního procesu: $$"
+echo "PID rodiče: $PPID"
+echo "Priorita procesu: $(ps -o pid,ni --no-headers $$ | awk '{print $2}')"
+echo "Celkový počet procesů: $(ps -e --no-headers | wc -l)"
